@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ============================================================
+       EDIT ME: page title + description (shows in browser tab + search)
+       ============================================================ -->
+  <title>Victor Zheng</title>
+  <meta name="description" content="Victor Zheng — engineer, runner, and traveler based in New York City." />
+
+  <!-- ============================================================
+       EDIT ME: link preview card (what shows when you share the URL
+       on iMessage, LinkedIn, Instagram bio, etc.)
+       Replace the URL and the og-image path once you deploy.
+       ============================================================ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Victor Zheng" />
+  <meta property="og:description" content="Engineer, runner, and traveler based in New York City." />
+  <meta property="og:url" content="https://victorzheng.com" />
+  <meta property="og:image" content="https://victorzheng.com/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Victor Zheng" />
+  <meta name="twitter:description" content="Engineer, runner, and traveler based in New York City." />
+  <meta name="twitter:image" content="https://victorzheng.com/og.png" />
+
+  <meta name="theme-color" content="#FBF7F1" />
+
+  <!-- EDIT ME: drop a favicon.png next to this file and it'll be picked up -->
+  <link rel="icon" href="favicon.png" />
+
+  <!-- Display typeface: Fraunces (warm, characterful serif). Falls back to
+       Palatino/Georgia if it can't load, so the page never looks broken. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Skip link for keyboard / screen-reader users -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">Victor Zheng</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#travel">Travel</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section id="top" class="hero wrap">
+      <p class="eyebrow">New York City</p>
+      <h1 class="hero-title">Hi, I&rsquo;m Victor.</h1>
+      <!-- EDIT ME: your one-paragraph intro. Keep it human. -->
+      <p class="hero-lede">
+        Mechanical engineer by training, aerospace by trade, now working in
+        private equity. I like building useful things, long runs in Central
+        Park, and tracking down the best bowl of noodles in whatever city I land in.
+      </p>
+      <!-- EDIT ME: replace the # with real links -->
+      <ul class="social" aria-label="Links">
+        <li><a href="mailto:you@example.com">Email</a></li>
+        <li><a href="#" rel="me">LinkedIn</a></li>
+        <li><a href="#" rel="me">GitHub</a></li>
+        <li><a href="#" rel="me">Strava</a></li>
+      </ul>
+    </section>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section id="projects" class="section wrap">
+      <div class="section-head">
+        <h2 class="section-title">Projects</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+
+      <!-- EDIT ME: one <a class="entry"> per project. Duplicate to add more. -->
+      <a class="entry" href="#">
+        <div class="entry-row">
+          <h3 class="entry-title">Marathon fundraiser site</h3>
+          <span class="entry-year">2026</span>
+        </div>
+        <p class="entry-desc">
+          A live fundraising page for the NYC Marathon with a donor-lit skyline
+          and a training tracker.
+        </p>
+      </a>
+
+      <a class="entry" href="#">
+        <div class="entry-row">
+          <h3 class="entry-title">A&amp;D morning intelligence brief</h3>
+          <span class="entry-year">2025</span>
+        </div>
+        <p class="entry-desc">
+          An automated daily research digest across defense-tech focus areas,
+          delivered to my inbox.
+        </p>
+      </a>
+    </section>
+
+    <!-- ===================== WORK ===================== -->
+    <section id="work" class="section wrap">
+      <div class="section-head">
+        <h2 class="section-title">Work</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+
+      <!-- EDIT ME: fill in real roles, companies, and dates. -->
+      <a class="entry" href="#">
+        <div class="entry-row">
+          <h3 class="entry-title">Operations &amp; research &middot; Private equity</h3>
+          <span class="entry-year">Present</span>
+        </div>
+        <p class="entry-desc">
+          Building research and intelligence workflows that turn messy inputs
+          into decisions.
+        </p>
+      </a>
+
+      <a class="entry" href="#">
+        <div class="entry-row">
+          <h3 class="entry-title">Engineer &middot; Aerospace &amp; defense</h3>
+          <span class="entry-year">Prior</span>
+        </div>
+        <p class="entry-desc">
+          Mechanical engineering on programs where the details had to be right
+          the first time.
+        </p>
+      </a>
+    </section>
+
+    <!-- ===================== TRAVEL ===================== -->
+    <section id="travel" class="section wrap">
+      <div class="section-head">
+        <h2 class="section-title">Travel</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+
+      <!-- EDIT ME: To use a real photo, replace the <div class="ph"> with:
+           <img src="images/kyoto.jpg" alt="Street in Kyoto at dusk" />
+           Keep the <figcaption>. Photos look best at a 4:5 portrait ratio. -->
+      <div class="gallery">
+        <figure class="photo">
+          <div class="ph ph-1" role="img" aria-label="Placeholder photo"></div>
+          <figcaption>Kyoto &middot; 2025</figcaption>
+        </figure>
+        <figure class="photo">
+          <div class="ph ph-2" role="img" aria-label="Placeholder photo"></div>
+          <figcaption>Patagonia &middot; 2024</figcaption>
+        </figure>
+        <figure class="photo">
+          <div class="ph ph-3" role="img" aria-label="Placeholder photo"></div>
+          <figcaption>Lisbon &middot; 2023</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="section wrap">
+      <div class="section-head">
+        <h2 class="section-title">About</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <!-- EDIT ME: a few sentences about you. -->
+      <div class="prose">
+        <p>
+          I grew up taking things apart to see how they worked, studied
+          mechanical engineering, and spent the early part of my career in
+          aerospace and defense. These days I work in private equity, where the
+          same instinct &mdash; understand the system, then improve it &mdash;
+          shows up in a different form.
+        </p>
+        <p>
+          Outside of work I&rsquo;m usually running, planning the next trip, or
+          building small tools for problems that annoy me. This site is where I
+          keep track of some of it.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>Victor Zheng</span>
+    <span class="coord">40.7831&deg; N, 73.9712&deg; W</span>
+  </footer>
+
+  <script>
+    // Highlight the nav link for whichever section is currently in view.
+    // Pure enhancement — anchors still work if this never runs.
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+      var map = {};
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        if (id) map[id] = a;
+      });
+      var sections = Object.keys(map)
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+      if (!('IntersectionObserver' in window) || !sections.length) return;
+
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (a) { a.classList.remove('active'); });
+            var link = map[e.target.id];
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+      sections.forEach(function (s) { obs.observe(s); });
+    })();
+  </script>
+</body>
+</html>
