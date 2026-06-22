@@ -211,7 +211,7 @@ a:focus-visible,
   border-top: 1px solid var(--line);
   transition: opacity 0.15s ease;
 }
-.entry:first-of-type { /* keep top rule tight under the section head */ }
+.entry:first-of-type { border-top: none; }
 .entry:hover { opacity: 0.7; }
 
 .entry-row {
@@ -305,6 +305,10 @@ a:focus-visible,
 
 @media (min-width: 900px) {
   .hero { padding-top: 110px; }
+}
+
+@media (min-width: 1200px) {
+  :root { --measure: 880px; }
 }
 
 /* ============================================================
