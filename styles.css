@@ -227,6 +227,9 @@ a:focus-visible,
   color: var(--ink);
   margin: 0;
 }
+.entry-title em {
+  font-weight: 400;
+}
 .entry-year {
   font-family: var(--font-mono);
   font-size: 13px;
