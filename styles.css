@@ -147,7 +147,6 @@ a:focus-visible,
 }
 
 .hero-lede {
-  max-width: 38rem;
   font-size: 17px;
   color: var(--text);
   margin: 0 0 26px;
