@@ -54,6 +54,8 @@
     </div>
   </header>
 
+  <p class="visitor-banner wrap" id="visitor-banner" hidden></p>
+
   <main id="main">
     <!-- ===================== HERO ===================== -->
     <section id="top" class="hero wrap">
@@ -132,10 +134,8 @@
           <span class="entry-year">2024&ndash;2025</span>
         </div>
         <p class="entry-desc">
-          Drive strategic supplier engagement, supply chain resilience, and
-          cross-functional execution to ensure mission-critical programs
-          achieve operational readiness, performance objectives, and
-          delivery commitments.
+          Supply chain resilience and supplier management in Aeronautics
+          business unit.
         </p>
       </a>
 
@@ -145,9 +145,8 @@
           <span class="entry-year">2023&ndash;2024</span>
         </div>
         <p class="entry-desc">
-          Enable end-to-end program execution by coordinating resources,
-          improving operational processes, and driving performance against
-          cost, schedule, and quality goals.
+          Operational process improvements for Rotary &amp; Mission Systems
+          business unit.
         </p>
       </a>
 
@@ -157,9 +156,8 @@
           <span class="entry-year">2022&ndash;2023</span>
         </div>
         <p class="entry-desc">
-          Led cross-functional efforts with engineering teams, suppliers,
-          inspectors to disposition non-conforming material through
-          root-cause analysis, corrective actions, and process improvements.
+          Disposition of nonconforming material, root-cause analysis, and
+          process improvements for Space products.
         </p>
       </a>
 
@@ -169,8 +167,8 @@
           <span class="entry-year">2021</span>
         </div>
         <p class="entry-desc">
-          Executed test, implementation, and engineering support for data
-          centers and power monitoring systems.
+          Test, implementation and engineering support for data centers and
+          power systems.
         </p>
       </a>
 
@@ -180,8 +178,8 @@
           <span class="entry-year">2021</span>
         </div>
         <p class="entry-desc">
-          Develop and support enterprise web software platforms and products
-          using React.js, Java, and Python.
+          Developed, maintained, and shipped production code for enterprise
+          web platforms.
         </p>
       </a>
 
@@ -191,8 +189,7 @@
           <span class="entry-year">2020</span>
         </div>
         <p class="entry-desc">
-          Established and maintained website for local nonprofit using HTML,
-          CSS, and JavaScript, optimized for search engine performance.
+          Developed website for local nonprofit.
         </p>
       </a>
 
@@ -202,9 +199,7 @@
           <span class="entry-year">2019</span>
         </div>
         <p class="entry-desc">
-          Leveraged Lean Six Sigma methodologies to drive process and
-          performance improvements in control and pressure valve systems for
-          midstream oil and gas applications.
+          Control and pressure valve systems process improvement.
         </p>
       </a>
     </section>
@@ -266,6 +261,39 @@
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
       sections.forEach(function (s) { obs.observe(s); });
+    })();
+  </script>
+
+  <!-- ===================== LAST VISITOR ===================== -->
+  <!-- Reads the previous visitor's city/state from a small free, keyless
+       KV store (kvdb.io), shows it, then writes the current visitor's
+       IP-derived city/state (via ipapi.co, also free + keyless) back for
+       the next person. Both calls fail silently if unreachable — the
+       banner just stays hidden. -->
+  <script>
+    (function () {
+      var KVDB_URL = 'https://kvdb.io/AgVQTDiUAx7joWsFGxAtbe/last_visitor';
+      var banner = document.getElementById('visitor-banner');
+      if (!banner) return;
+
+      fetch(KVDB_URL)
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (lastVisitor) {
+          if (lastVisitor) {
+            banner.textContent = 'Last visitor from ' + lastVisitor;
+            banner.hidden = false;
+          }
+        })
+        .catch(function () {});
+
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (geo) {
+          if (!geo || !geo.city) return;
+          var loc = geo.region_code ? geo.city + ', ' + geo.region_code : geo.city;
+          fetch(KVDB_URL, { method: 'POST', body: loc }).catch(function () {});
+        })
+        .catch(function () {});
     })();
   </script>
 

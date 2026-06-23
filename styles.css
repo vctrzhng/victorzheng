@@ -121,6 +121,15 @@ a:focus-visible,
   border-bottom-color: var(--accent);
 }
 
+.visitor-banner {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+  letter-spacing: 0.02em;
+  margin: 14px auto 0;
+}
+.visitor-banner[hidden] { display: none; }
+
 /* ============================================================
    Hero
    ============================================================ */
