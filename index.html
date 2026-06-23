@@ -98,17 +98,6 @@
 
       <a class="entry" href="#">
         <div class="entry-row">
-          <h3 class="entry-title">A&amp;D morning intelligence brief</h3>
-          <span class="entry-year">2025</span>
-        </div>
-        <p class="entry-desc">
-          An automated daily research digest across defense-tech focus areas,
-          delivered to my inbox.
-        </p>
-      </a>
-
-      <a class="entry" href="#">
-        <div class="entry-row">
           <h3 class="entry-title">Voice Activated Calculator</h3>
           <span class="entry-year">2020</span>
         </div>
@@ -133,8 +122,7 @@
           <span class="entry-year">2025&ndash;Present</span>
         </div>
         <p class="entry-desc">
-          Supporting portfolio operations and research across the private
-          equity platform.
+          Spend management and due diligence across core private equity funds.
         </p>
       </a>
 
@@ -144,8 +132,10 @@
           <span class="entry-year">2024&ndash;2025</span>
         </div>
         <p class="entry-desc">
-          Managed technical subcontracts, coordinating delivery and compliance
-          across supplier programs.
+          Drive strategic supplier engagement, supply chain resilience, and
+          cross-functional execution to ensure mission-critical programs
+          achieve operational readiness, performance objectives, and
+          delivery commitments.
         </p>
       </a>
 
@@ -155,8 +145,9 @@
           <span class="entry-year">2023&ndash;2024</span>
         </div>
         <p class="entry-desc">
-          Oversaw production operations on programs where the details had to
-          be right the first time.
+          Enable end-to-end program execution by coordinating resources,
+          improving operational processes, and driving performance against
+          cost, schedule, and quality goals.
         </p>
       </a>
 
@@ -166,8 +157,9 @@
           <span class="entry-year">2022&ndash;2023</span>
         </div>
         <p class="entry-desc">
-          Drove quality engineering and root-cause analysis across
-          manufacturing processes.
+          Led cross-functional efforts with engineering teams, suppliers,
+          inspectors to disposition non-conforming material through
+          root-cause analysis, corrective actions, and process improvements.
         </p>
       </a>
 
@@ -177,8 +169,8 @@
           <span class="entry-year">2021</span>
         </div>
         <p class="entry-desc">
-          Designed and ran qualification tests on electrical and power
-          systems.
+          Executed test, implementation, and engineering support for data
+          centers and power monitoring systems.
         </p>
       </a>
 
@@ -188,7 +180,8 @@
           <span class="entry-year">2021</span>
         </div>
         <p class="entry-desc">
-          Built software tools supporting engineering and operations teams.
+          Develop and support enterprise web software platforms and products
+          using React.js, Java, and Python.
         </p>
       </a>
 
@@ -198,8 +191,8 @@
           <span class="entry-year">2020</span>
         </div>
         <p class="entry-desc">
-          Developed and maintained the website for a community outreach
-          nonprofit.
+          Established and maintained website for local nonprofit using HTML,
+          CSS, and JavaScript, optimized for search engine performance.
         </p>
       </a>
 
@@ -209,8 +202,9 @@
           <span class="entry-year">2019</span>
         </div>
         <p class="entry-desc">
-          Improved manufacturing processes and tooling on the production
-          floor.
+          Leveraged Lean Six Sigma methodologies to drive process and
+          performance improvements in control and pressure valve systems for
+          midstream oil and gas applications.
         </p>
       </a>
     </section>
@@ -287,13 +281,10 @@
       var container = document.getElementById('travel-map');
       if (!container || typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
 
-      // EDIT ME: add or remove trips here. lat/lon can be approximate —
-      // city/region center is fine.
-      var TRIPS = [
-        { name: 'Kyoto', year: 2025, lat: 35.0116, lon: 135.7681 },
-        { name: 'Patagonia', year: 2024, lat: -49.3328, lon: -72.8856 },
-        { name: 'Lisbon', year: 2023, lat: 38.7223, lon: -9.1393 }
-      ];
+      // EDIT ME: add trips here. lat/lon can be approximate — city/region
+      // center is fine. Example:
+      // { name: 'Kyoto', year: 2025, lat: 35.0116, lon: 135.7681 }
+      var TRIPS = [];
 
       var list = document.getElementById('map-trip-list');
       TRIPS.forEach(function (t) {
