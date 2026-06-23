@@ -274,9 +274,21 @@ a:focus-visible,
 .travel-map svg:active { cursor: grabbing; }
 
 .map-land-shape {
-  fill: var(--bg);
+  fill: #FFFDF9;
+  stroke: none;
+}
+
+.map-country-border {
+  fill: none;
   stroke: var(--line);
   stroke-width: 0.6px;
+}
+
+.map-state-border {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 0.5px;
+  opacity: 0.6;
 }
 
 .map-pin { cursor: pointer; }

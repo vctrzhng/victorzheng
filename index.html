@@ -306,25 +306,50 @@
       var svg = d3.select('#travel-map-svg');
       var g = svg.append('g');
       var landGroup = g.append('g').attr('class', 'map-land');
+      var borderGroup = g.append('g').attr('class', 'map-borders');
+      var stateGroup = g.append('g').attr('class', 'map-states');
       var pinGroup = g.append('g').attr('class', 'map-pins');
 
       var projection = d3.geoNaturalEarth1().fitSize([width, height], { type: 'Sphere' });
       var path = d3.geoPath(projection);
 
-      fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
+      var worldFetch = fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
         .then(function (r) { return r.json(); })
         .then(function (world) {
-          // Render the merged landmass (no per-country borders) for a calm
-          // silhouette instead of a busy political atlas.
+          // Landmass fill (calm silhouette) plus country border lines drawn
+          // on top, so it reads as a map grid without looking like a dense
+          // political atlas.
           var land = topojson.feature(world, world.objects.land);
-          var features = land.features || [land];
+          var landFeatures = land.features || [land];
 
           landGroup.selectAll('path')
-            .data(features)
+            .data(landFeatures)
             .join('path')
             .attr('class', 'map-land-shape')
             .attr('d', path);
 
+          var countries = topojson.feature(world, world.objects.countries);
+          borderGroup.selectAll('path')
+            .data(countries.features)
+            .join('path')
+            .attr('class', 'map-country-border')
+            .attr('d', path);
+        });
+
+      // US state lines layered on top — most relevant to national-park pins.
+      var statesFetch = fetch('https://unpkg.com/us-atlas@3/states-10m.json')
+        .then(function (r) { return r.json(); })
+        .then(function (us) {
+          var states = topojson.feature(us, us.objects.states);
+          stateGroup.selectAll('path')
+            .data(states.features)
+            .join('path')
+            .attr('class', 'map-state-border')
+            .attr('d', path);
+        });
+
+      Promise.all([worldFetch, statesFetch])
+        .then(function () {
           var pins = pinGroup.selectAll('g.map-pin')
             .data(TRIPS)
             .join('g')
@@ -368,6 +393,8 @@
           g.attr('transform', event.transform);
           var k = event.transform.k;
           g.selectAll('.map-land-shape').attr('stroke-width', 0.6 / k);
+          g.selectAll('.map-country-border').attr('stroke-width', 0.6 / k);
+          g.selectAll('.map-state-border').attr('stroke-width', 0.5 / k);
           g.selectAll('.map-pin-dot').attr('r', 4 / k).attr('stroke-width', 1.5 / k);
           g.selectAll('.map-pin-label-group').attr('transform', 'translate(' + (9 / k) + ',0) scale(' + (1 / k) + ')');
         });
