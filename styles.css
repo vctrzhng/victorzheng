@@ -229,6 +229,7 @@ a:focus-visible,
 }
 .entry-title em {
   font-weight: 400;
+  font-style: normal;
 }
 .entry-year {
   font-family: var(--font-mono);
