@@ -243,30 +243,81 @@ a:focus-visible,
   max-width: 44rem;
 }
 
-/* Travel gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 18px;
+/* Travel map */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
-.photo { margin: 0; }
-.photo .ph,
-.photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+
+.map-card {
+  margin-top: 18px;
+  position: relative;
   border-radius: var(--radius);
   background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
 }
-.ph-1 { background: #E3D5C3; }
-.ph-2 { background: #CBD2C2; }
-.ph-3 { background: #C8B8A6; }
-.photo figcaption {
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--muted);
+
+.travel-map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+.travel-map svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+.travel-map svg:active { cursor: grabbing; }
+
+.map-country {
+  fill: var(--line);
+  stroke: var(--bg);
+  stroke-width: 0.5px;
+}
+
+.map-pin-dot {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 1.5px;
+}
+.map-pin-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+
+.map-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+}
+.map-btn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.map-btn:hover { background: var(--surface); }
+.map-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* About prose */
@@ -299,11 +350,10 @@ a:focus-visible,
 }
 
 /* ============================================================
-   Responsive — wider screens get more room + a 3-up gallery
+   Responsive — wider screens get more room
    ============================================================ */
 @media (min-width: 640px) {
   :root { --pad: 32px; }
-  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (min-width: 900px) {

@@ -222,23 +222,20 @@
         <span class="rule" aria-hidden="true"></span>
       </div>
 
-      <!-- EDIT ME: To use a real photo, replace the <div class="ph"> with:
-           <img src="images/kyoto.jpg" alt="Street in Kyoto at dusk" />
-           Keep the <figcaption>. Photos look best at a 4:5 portrait ratio. -->
-      <div class="gallery">
-        <figure class="photo">
-          <div class="ph ph-1" role="img" aria-label="Placeholder photo"></div>
-          <figcaption>Kyoto &middot; 2025</figcaption>
-        </figure>
-        <figure class="photo">
-          <div class="ph ph-2" role="img" aria-label="Placeholder photo"></div>
-          <figcaption>Patagonia &middot; 2024</figcaption>
-        </figure>
-        <figure class="photo">
-          <div class="ph ph-3" role="img" aria-label="Placeholder photo"></div>
-          <figcaption>Lisbon &middot; 2023</figcaption>
-        </figure>
+      <!-- EDIT ME: add/remove trips in the TRIPS array near the bottom of
+           the file (search for "TRAVEL MAP"). Each entry needs a name,
+           year, and lat/lon. -->
+      <div class="map-card">
+        <div class="map-controls" role="group" aria-label="Map zoom controls">
+          <button type="button" class="map-btn" id="map-zoom-out" aria-label="Zoom out">&minus;</button>
+          <button type="button" class="map-btn" id="map-zoom-reset" aria-label="Reset map view">Reset</button>
+          <button type="button" class="map-btn" id="map-zoom-in" aria-label="Zoom in">+</button>
+        </div>
+        <div class="travel-map" id="travel-map">
+          <svg id="travel-map-svg" viewBox="0 0 800 460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="World map with pins marking places I've traveled"></svg>
+        </div>
       </div>
+      <ul class="map-trip-list sr-only" id="map-trip-list" aria-label="Places I've traveled"></ul>
     </section>
 
   </main>
@@ -275,6 +272,97 @@
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
       sections.forEach(function (s) { obs.observe(s); });
+    })();
+  </script>
+
+  <!-- ===================== TRAVEL MAP ===================== -->
+  <!-- Lightweight vector world map: D3 draws country borders + zoom/pan,
+       topojson-client unpacks the (CDN-hosted, free) world-atlas borders.
+       No API key needed. If either CDN script fails to load, the section
+       just stays empty — the sr-only list below still has the data. -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+  <script>
+    (function () {
+      var container = document.getElementById('travel-map');
+      if (!container || typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
+
+      // EDIT ME: add or remove trips here. lat/lon can be approximate —
+      // city/region center is fine.
+      var TRIPS = [
+        { name: 'Kyoto', year: 2025, lat: 35.0116, lon: 135.7681 },
+        { name: 'Patagonia', year: 2024, lat: -49.3328, lon: -72.8856 },
+        { name: 'Lisbon', year: 2023, lat: 38.7223, lon: -9.1393 }
+      ];
+
+      var list = document.getElementById('map-trip-list');
+      TRIPS.forEach(function (t) {
+        var li = document.createElement('li');
+        li.textContent = t.name + ', ' + t.year;
+        list.appendChild(li);
+      });
+
+      var width = 800, height = 460;
+      var svg = d3.select('#travel-map-svg');
+      var g = svg.append('g');
+      var landGroup = g.append('g').attr('class', 'map-land');
+      var pinGroup = g.append('g').attr('class', 'map-pins');
+
+      var projection = d3.geoNaturalEarth1().fitSize([width, height], { type: 'Sphere' });
+      var path = d3.geoPath(projection);
+
+      fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
+        .then(function (r) { return r.json(); })
+        .then(function (world) {
+          var countries = topojson.feature(world, world.objects.countries);
+
+          landGroup.selectAll('path')
+            .data(countries.features)
+            .join('path')
+            .attr('class', 'map-country')
+            .attr('d', path);
+
+          var pins = pinGroup.selectAll('g.map-pin')
+            .data(TRIPS)
+            .join('g')
+            .attr('class', 'map-pin')
+            .attr('transform', function (d) {
+              var p = projection([d.lon, d.lat]);
+              return 'translate(' + p[0] + ',' + p[1] + ')';
+            });
+
+          pins.append('circle').attr('class', 'map-pin-dot').attr('r', 5);
+          pins.append('title').text(function (d) { return d.name + ' · ' + d.year; });
+          pins.append('text')
+            .attr('class', 'map-pin-label')
+            .attr('x', 8)
+            .attr('y', 4)
+            .text(function (d) { return d.name; });
+        })
+        .catch(function () { /* CDN unreachable — sr-only list still has the data */ });
+
+      var zoom = d3.zoom()
+        .scaleExtent([1, 8])
+        .translateExtent([[0, 0], [width, height]])
+        .on('zoom', function (event) {
+          g.attr('transform', event.transform);
+          var k = event.transform.k;
+          g.selectAll('.map-country').attr('stroke-width', 0.5 / k);
+          g.selectAll('.map-pin-dot').attr('r', 5 / k);
+          g.selectAll('.map-pin-label').style('font-size', (11 / k) + 'px').attr('x', 8 / k).attr('y', 4 / k);
+        });
+
+      svg.call(zoom);
+
+      document.getElementById('map-zoom-in').addEventListener('click', function () {
+        svg.transition().duration(200).call(zoom.scaleBy, 1.6);
+      });
+      document.getElementById('map-zoom-out').addEventListener('click', function () {
+        svg.transition().duration(200).call(zoom.scaleBy, 1 / 1.6);
+      });
+      document.getElementById('map-zoom-reset').addEventListener('click', function () {
+        svg.transition().duration(300).call(zoom.transform, d3.zoomIdentity);
+      });
     })();
   </script>
 </body>
