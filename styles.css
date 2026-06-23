@@ -219,7 +219,7 @@ a:focus-visible,
   border-top: 1px solid var(--line);
   transition: opacity 0.15s ease;
 }
-.entry:first-of-type { border-top: none; }
+.section-head + .entry { border-top: none; }
 .entry:hover { opacity: 0.7; }
 
 .entry-row {
