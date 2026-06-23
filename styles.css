@@ -274,8 +274,9 @@ a:focus-visible,
 .travel-map svg:active { cursor: grabbing; }
 
 .map-land-shape {
-  fill: color-mix(in srgb, var(--line) 65%, var(--surface) 35%);
-  stroke: none;
+  fill: var(--bg);
+  stroke: var(--line);
+  stroke-width: 0.6px;
 }
 
 .map-pin { cursor: pointer; }
